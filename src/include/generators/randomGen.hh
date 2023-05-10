@@ -24,6 +24,8 @@ class RandomGenerator : public AbstractGenerator {
    */
   std::vector<Item> generate() override;
 
+  std::string name() override { return "Random Generator"; }
+
  private:
   int numItems_;  ///< Number of items to generate
 };

@@ -20,5 +20,14 @@ endif()
 file(GLOB_RECURSE SOURCES "src/*.cc")
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
-# Include the headers under src/headers/**
-include_directories("src/headers")
+include_directories("src/include")
+include_directories("src/include/allocators")
+include_directories("src/include/generators")
+# # Add the current source directory to the include directories
+# include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+# # Add all subdirectories containing header files to the include directories
+# file(GLOB_RECURSE HEADER_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/*.hh")
+# foreach(DIR ${HEADER_DIRS})
+#     get_filename_component(INCLUDE_DIR ${DIR} DIRECTORY)
+#     include_directories(${INCLUDE_DIR})
+# endforeach()

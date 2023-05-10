@@ -1,8 +1,8 @@
+#include <chrono>
 #include <iostream>
 
 #include "allocators.hh"
 #include "generators.hh"
-#include "item.hh"
 
 std::vector<Item> input_data(int d, int n) {
   std::vector<double> szs;
@@ -26,12 +26,23 @@ int main() {
   std::cin >> d >> n;
   std::vector<Item> items = input_data(d, n);
 
-  // Prepare generators
-  std::vector<AbstractGenerator*> generators;
-  generators.push_back(new SimpleGenerator1);
-
   // Prepare allocators
   std::vector<AbstractAllocator*> allocators;
+  allocators.push_back(new FirstFitAllocator);
+  allocators.push_back(new FFDItemCentricProductAllocator);
+  allocators.push_back(new FFDItemCentricSumAllocator);
+  allocators.push_back(new FFDBinCentricDotProductAllocator);
+  allocators.push_back(new FFDBinCentricNormAllocator);
+
+  // Run allocators
+  for (auto& allocator : allocators) {
+    allocator->test_and_report(items);
+  }
+
+  // Clean up
+  for (auto& allocator : allocators) {
+    delete allocator;
+  }
 
   return 0;
 }

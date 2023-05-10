@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "bin.hh"
 #include "item.hh"
 
@@ -19,4 +21,8 @@ class AbstractGenerator {
    * @return Vector of items generated
    */
   virtual std::vector<Item> generate() = 0;
+
+  virtual std::string name() = 0;
+
+  virtual ~AbstractGenerator() = default;
 };

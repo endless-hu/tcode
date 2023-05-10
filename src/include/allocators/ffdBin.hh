@@ -11,9 +11,9 @@
 /**
  * This class adopts Dot Product to decide which item is the "largest"
  */
-class FirstFitBinCentricDotProductAllocator : public AbstractAllocator {
+class FFDBinCentricDotProductAllocator : public AbstractAllocator {
  public:
-  FirstFitBinCentricDotProductAllocator() = default;
+  FFDBinCentricDotProductAllocator() = default;
 
   /**
    * @brief Virtual function to allocate items to bins
@@ -21,14 +21,16 @@ class FirstFitBinCentricDotProductAllocator : public AbstractAllocator {
    * @return Vector of bins with items allocated to them
    */
   int allocate(std::vector<Item>& items) override;
+
+  std::string name() override { return "FFD-Bin Centric Dot Product"; }
 };
 
 /**
  * This class adopts the Norm to decide which item is the "largest"
  */
-class FirstFitBinCentricNormAllocator : public AbstractAllocator {
+class FFDBinCentricNormAllocator : public AbstractAllocator {
  public:
-  FirstFitBinCentricNormAllocator() = default;
+  FFDBinCentricNormAllocator() = default;
 
   /**
    * @brief Virtual function to allocate items to bins
@@ -36,4 +38,6 @@ class FirstFitBinCentricNormAllocator : public AbstractAllocator {
    * @return Vector of bins with items allocated to them
    */
   int allocate(std::vector<Item>& items) override;
+
+  std::string name() override { return "FFD-Bin Centric Norm"; }
 };

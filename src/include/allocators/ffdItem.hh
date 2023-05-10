@@ -12,9 +12,9 @@
 /**
  * This class adopts Product to sort the items.
  */
-class FirstFitItemCentricProductAllocator : public AbstractAllocator {
+class FFDItemCentricProductAllocator : public AbstractAllocator {
  public:
-  FirstFitItemCentricProductAllocator() = default;
+  FFDItemCentricProductAllocator() = default;
 
   /**
    * @brief Virtual function to allocate items to bins
@@ -22,14 +22,16 @@ class FirstFitItemCentricProductAllocator : public AbstractAllocator {
    * @return Vector of bins with items allocated to them
    */
   int allocate(std::vector<Item>& items) override;
+
+  std::string name() override { return "FFD Item Centric Product"; }
 };
 
 /**
  * This class adopts the Sum to sort the items.
  */
-class FirstFitItemCentricSumAllocator : public AbstractAllocator {
+class FFDItemCentricSumAllocator : public AbstractAllocator {
  public:
-  FirstFitItemCentricSumAllocator() = default;
+  FFDItemCentricSumAllocator() = default;
 
   /**
    * @brief Virtual function to allocate items to bins
@@ -37,4 +39,6 @@ class FirstFitItemCentricSumAllocator : public AbstractAllocator {
    * @return Vector of bins with items allocated to them
    */
   int allocate(std::vector<Item>& items) override;
+
+  std::string name() override { return "FFD Item Centric Sum"; }
 };

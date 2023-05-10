@@ -26,6 +26,8 @@ class SpecialGenerator : public AbstractGenerator {
    */
   std::vector<Item> generate() override;
 
+  std::string name() override { return "Special Generator"; }
+
  private:
   int numItems_;  ///< Number of items to generate
 };

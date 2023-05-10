@@ -17,4 +17,6 @@ class FirstFitAllocator : public AbstractAllocator {
    * @return Vector of bins with items allocated to them
    */
   int allocate(std::vector<Item>& items) override;
+
+  std::string name() override { return "First Fit"; }
 };
