@@ -14,17 +14,7 @@ class RandomSplitGenerator : public AbstractGenerator {
    *
    * @param numItems Number of items to generate
    */
-  RandomSplitGenerator(int numItems) : numItems_(numItems) {}
-
-  /**
-   * @brief Virtual function to generate items
-   *
-   * @return Vector of items generated
-   */
-  std::vector<Item> generate() override;
+  RandomSplitGenerator(int numItems, int dim);
 
   std::string name() override { return "Random Split Generator"; }
-
- private:
-  int numItems_;  ///< Number of items to generate
 };

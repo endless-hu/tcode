@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 #include "bin.hh"
 #include "item.hh"
@@ -12,23 +13,29 @@ class AbstractGenerator {
  public:
   /**
    * Constructor for Generator class
+   * For its concrete subclasses, they should override this constructor
+   * and generate items in the constructor.
    */
   AbstractGenerator() = default;
 
-  /**
-   * Virtual function to generate items
-   *
-   * @return Vector of items generated
-   */
-  virtual std::vector<Item> generate() = 0;
-
   virtual std::string name() = 0;
+
+  std::vector<Item>& get_items() { return items_; }
+
+  // To output for machine processing
+  std::string format_to_string() {
+    std::string s = "" + std::to_string(items_[0].dim()) + " " +
+                    std::to_string(items_.size()) + "\n";
+    for (auto& item : items_) {
+      s += item.format_to_string() + "\n";
+    }
+    return s;
+  }
 
   // For test purpose
   std::string to_string() {
     std::string s = "{\n";
-    std::vector<Item> items = generate();
-    for (auto& item : items) {
+    for (auto& item : items_) {
       s += item.to_string() + "\n";
     }
     s += "}\n";
@@ -36,4 +43,7 @@ class AbstractGenerator {
   }
 
   virtual ~AbstractGenerator() = default;
+
+ protected:
+  std::vector<Item> items_;
 };

@@ -26,6 +26,8 @@ include_directories("src/include/generators")
 
 # enable ctest
 enable_testing()
+# Set the output directory for executables in the 'test/' directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/test)
 # Add the src/ directory to the list of directories to search for include files
 include_directories(${PROJECT_SOURCE_DIR}/src)
 file(GLOB_RECURSE TEST_SOURCES "test/*.cc")

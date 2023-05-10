@@ -1,5 +1,3 @@
 #include "randomSplit.hh"
 
-std::vector<Item> RandomSplitGenerator::generate() {
-  return std::vector<Item>();
-}
+RandomSplitGenerator::RandomSplitGenerator(int numItems, int dim) {}

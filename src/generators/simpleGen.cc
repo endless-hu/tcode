@@ -1,7 +1,7 @@
 #include "simpleGen.hh"
 
-std::vector<Item> SimpleGenerator1::generate() { return std::vector<Item>(); }
+SimpleGenerator1::SimpleGenerator1() {}
 
-std::vector<Item> SimpleGenerator2::generate() { return std::vector<Item>(); }
+SimpleGenerator2::SimpleGenerator2() {}
 
-std::vector<Item> SimpleGenerator3::generate() { return std::vector<Item>(); }
+SimpleGenerator3::SimpleGenerator3() {}

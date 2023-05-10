@@ -20,19 +20,9 @@ class SpecialGenerator1 : public AbstractGenerator {
    *
    * @param numItems Number of items to generate
    */
-  SpecialGenerator1(int numItems) : numItems_(numItems) {}
-
-  /**
-   * @brief Virtual function to generate items
-   *
-   * @return Vector of items generated
-   */
-  std::vector<Item> generate() override;
+  SpecialGenerator1(int numItems);
 
   std::string name() override { return "Special Generator 1"; }
-
- private:
-  int numItems_;  ///< Number of items to generate
 };
 
 /**
@@ -45,17 +35,7 @@ class SpecialGenerator2 : public AbstractGenerator {
    *
    * @param numItems Number of items to generate
    */
-  SpecialGenerator2(int numItems) : numItems_(numItems) {}
-
-  /**
-   * @brief Virtual function to generate items
-   *
-   * @return Vector of items generated
-   */
-  std::vector<Item> generate() override;
+  SpecialGenerator2(int numItems);
 
   std::string name() override { return "Special Generator 1"; }
-
- private:
-  int numItems_;  ///< Number of items to generate
 };

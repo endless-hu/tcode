@@ -51,6 +51,14 @@ class Item {
    */
   double get_size(int i) const { return sizes_.at(i); }
 
+  std::string format_to_string() const {
+    std::string s = "";
+    for (auto& size : sizes_) {
+      s += std::to_string(size) + " ";
+    }
+    return s;
+  }
+
   std::string to_string() const {
     std::string s = "[";
     for (auto& size : sizes_) {

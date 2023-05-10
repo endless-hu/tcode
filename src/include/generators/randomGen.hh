@@ -15,17 +15,7 @@ class RandomGenerator : public AbstractGenerator {
    * @param numItems Number of items to generate
    * @param binCapacity Capacity of bins to be generated
    */
-  RandomGenerator(int numItems);
-
-  /**
-   * @brief Virtual function to generate items
-   *
-   * @return Vector of items generated
-   */
-  std::vector<Item> generate() override;
+  RandomGenerator(int numItems, int dim);
 
   std::string name() override { return "Random Generator"; }
-
- private:
-  int numItems_;  ///< Number of items to generate
 };
