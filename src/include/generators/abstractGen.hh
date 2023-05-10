@@ -24,5 +24,16 @@ class AbstractGenerator {
 
   virtual std::string name() = 0;
 
+  // For test purpose
+  std::string to_string() {
+    std::string s = "{\n";
+    std::vector<Item> items = generate();
+    for (auto& item : items) {
+      s += item.to_string() + "\n";
+    }
+    s += "}\n";
+    return s;
+  }
+
   virtual ~AbstractGenerator() = default;
 };

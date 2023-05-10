@@ -23,11 +23,22 @@ add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 include_directories("src/include")
 include_directories("src/include/allocators")
 include_directories("src/include/generators")
-# # Add the current source directory to the include directories
-# include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-# # Add all subdirectories containing header files to the include directories
-# file(GLOB_RECURSE HEADER_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/*.hh")
-# foreach(DIR ${HEADER_DIRS})
-#     get_filename_component(INCLUDE_DIR ${DIR} DIRECTORY)
-#     include_directories(${INCLUDE_DIR})
-# endforeach()
+
+# enable ctest
+enable_testing()
+# Add the src/ directory to the list of directories to search for include files
+include_directories(${PROJECT_SOURCE_DIR}/src)
+file(GLOB_RECURSE TEST_SOURCES "test/*.cc")
+file(GLOB_RECURSE ALLOC_SRC "src/allocators/*.cc")
+file(GLOB GEN_SRC "src/generators/*.cc")
+file(GLOB HDR_SRC "src/include/*.hh")
+foreach(TEST_SOURCE ${TEST_SOURCES})
+  get_filename_component(TEST_NAME ${TEST_SOURCE} NAME_WE)
+  add_executable(${TEST_NAME} ${TEST_SOURCE})
+  target_sources(${TEST_NAME} PRIVATE
+      ${ALLOC_SRC}
+      ${GEN_SRC}
+      ${HDR_SRC}
+  )
+  add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+endforeach()

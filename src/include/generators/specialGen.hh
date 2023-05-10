@@ -56,17 +56,6 @@ class SpecialGenerator2 : public AbstractGenerator {
 
   std::string name() override { return "Special Generator 1"; }
 
-  // For test purpose
-  std::string to_string() {
-    std::string s = "{\n";
-    std::vector<Item> items = generate();
-    for (auto& item : items) {
-      s += item.to_string() + "\n";
-    }
-    s += "}\n";
-    return s;
-  }
-
  private:
   int numItems_;  ///< Number of items to generate
 };
