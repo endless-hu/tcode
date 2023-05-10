@@ -8,12 +8,12 @@
  *
  * This class contains the definition of the Allocator class.
  */
-class Allocator {
+class AbstractAllocator {
  public:
   /**
    * @brief Constructor for Allocator class
    */
-  Allocator() {}
+  AbstractAllocator() = default;
 
   /**
    * @brief Virtual function to allocate items to bins
@@ -22,6 +22,6 @@ class Allocator {
    */
   virtual int allocate(std::vector<Item>& items) = 0;
 
- private:
+ protected:
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to
 };

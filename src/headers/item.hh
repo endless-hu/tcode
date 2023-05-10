@@ -19,7 +19,7 @@ class Item {
    * @param dim Dimension of the item
    * @param sizes Vector of sizes of the item in each dimension
    */
-  Item(int dim, std::vector<double> sizes) : sizes_(sizes) {}
+  Item(std::vector<double> sizes) : sizes_(sizes) {}
 
   /**
    * @brief Getter for the dimension of the item

@@ -19,3 +19,6 @@ endif()
 # Add all .cc files under src/
 file(GLOB_RECURSE SOURCES "src/*.cc")
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
+
+# Include the headers under src/headers/**
+include_directories("src/headers")

@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "allocators.hh"
+#include "generators.hh"
 #include "item.hh"
 
 std::vector<Item> input_data(int d, int n) {
@@ -12,9 +14,10 @@ std::vector<Item> input_data(int d, int n) {
       std::cin >> sz;
       szs.push_back(sz);
     }
-    items.emplace_back(d, szs);
+    items.emplace_back(szs);
     szs.clear();
   }
+  return items;
 }
 
 int main() {
@@ -22,4 +25,5 @@ int main() {
   std::cout << "Enter `#dimension #items`: ";
   std::cin >> d >> n;
   std::vector<Item> items = input_data(d, n);
+  return 0;
 }
