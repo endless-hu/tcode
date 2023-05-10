@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <string>
 #include <vector>
 
 class Item {
@@ -33,5 +34,22 @@ class Item {
    *
    * @return vector reference to the size of the item
    */
-  const std::vector<double>& sizes() const { return sizes_; }
+  const std::vector<double>& get_sizes() const { return sizes_; }
+
+  /**
+   * @brief Getter for the size of the item in a particular dimension
+   *
+   * @param i Dimension of the item
+   * @return Size of the item in the dimension i
+   */
+  double get_size(int i) const { return sizes_[i]; }
+
+  std::string to_string() const {
+    std::string s = "[";
+    for (auto& size : sizes_) {
+      s += std::to_string(size) + " ";
+    }
+    s += "]";
+    return s;
+  }
 };
