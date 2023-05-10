@@ -25,5 +25,13 @@ int main() {
   std::cout << "Enter `#dimension #items`: ";
   std::cin >> d >> n;
   std::vector<Item> items = input_data(d, n);
+
+  // Prepare generators
+  std::vector<AbstractGenerator*> generators;
+  generators.push_back(new SimpleGenerator1);
+
+  // Prepare allocators
+  std::vector<AbstractAllocator*> allocators;
+
   return 0;
 }

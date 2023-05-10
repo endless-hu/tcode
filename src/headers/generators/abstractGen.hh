@@ -1,5 +1,6 @@
 #pragma once
 
+#include "bin.hh"
 #include "item.hh"
 
 /**
@@ -10,7 +11,7 @@ class AbstractGenerator {
   /**
    * Constructor for Generator class
    */
-  AbstractGenerator() {}
+  AbstractGenerator() = default;
 
   /**
    * Virtual function to generate items
