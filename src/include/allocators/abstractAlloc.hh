@@ -41,11 +41,14 @@ class AbstractAllocator {
    *
    * @return Vector of bins with items allocated to them
    */
-  virtual int allocate(std::vector<Item>& items) = 0;
+  virtual int allocate(const std::vector<Item>& items) = 0;
 
   virtual std::string name() = 0;
 
   virtual ~AbstractAllocator() = default;
+
+  // Give out the bins
+  std::vector<Bin> bins() { return bins_; }
 
  protected:
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to

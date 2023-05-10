@@ -34,6 +34,14 @@ class Bin {
     items_.push_back(&item);
   }
 
+  double dot_product_with(const Item& item) {
+    double dot_product = 0;
+    for (int i = 0; i < item.dim(); ++i) {
+      dot_product += item.get_size(i) * sizes_[i];
+    }
+    return dot_product;
+  }
+
   std::string to_string() const {
     std::string s = "{\n";
     for (auto& item : items_) {

@@ -13,6 +13,9 @@
 class Item {
  private:
   std::vector<double> sizes_;  ///< Sizes of the item in each dimension
+  double product_;
+  double sum_;
+
  public:
   /**
    * @brief Constructor for Item class
@@ -20,7 +23,11 @@ class Item {
    * @param dim Dimension of the item
    * @param sizes Vector of sizes of the item in each dimension
    */
-  Item(std::vector<double> sizes) : sizes_(sizes) {}
+  Item(std::vector<double> sizes) : sizes_(sizes), product_(1), sum_(0) {
+    for (auto& size : sizes_) {
+      product_ *= size;
+    }
+  }
 
   /**
    * @brief Getter for the dimension of the item
@@ -51,5 +58,16 @@ class Item {
     }
     s += "]";
     return s;
+  }
+
+  double product() const { return product_; }
+
+  double sum(const std::vector<double>& a) {
+    if (!sum_) {  // if sum_ not calculated yet
+      for (int i = 0; i < dim(); i++) {
+        sum_ += a[i] * sizes_[i];
+      }
+    }
+    return sum_;
   }
 };

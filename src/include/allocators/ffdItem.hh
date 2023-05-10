@@ -21,7 +21,7 @@ class FFDItemCentricProductAllocator : public AbstractAllocator {
    *
    * @return Vector of bins with items allocated to them
    */
-  int allocate(std::vector<Item>& items) override;
+  int allocate(const std::vector<Item>& items) override;
 
   std::string name() override { return "FFD Item Centric Product"; }
 };
@@ -38,7 +38,10 @@ class FFDItemCentricSumAllocator : public AbstractAllocator {
    *
    * @return Vector of bins with items allocated to them
    */
-  int allocate(std::vector<Item>& items) override;
+  int allocate(const std::vector<Item>& items) override;
 
   std::string name() override { return "FFD Item Centric Sum"; }
+
+ private:
+  std::vector<double> calculate_a(const std::vector<Item>& items);
 };

@@ -1,8 +1,8 @@
 #include "ff.hh"
 
-int FirstFitAllocator::allocate(std::vector<Item>& items
+int FirstFitAllocator::allocate(const std::vector<Item>& items
                                 __attribute__((unused))) {
-  for (auto& item : items) {
+  for (auto item : items) {
     bool allocated = false;
     for (auto& bin : bins_) {
       if (bin.fits(item)) {
