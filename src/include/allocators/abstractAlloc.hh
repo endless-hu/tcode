@@ -50,6 +50,24 @@ class AbstractAllocator {
   // Give out the bins
   std::vector<Bin> bins() { return bins_; }
 
+  /**
+   * @brief Calculate the a vector for the items
+   *
+   * a_i = 1/n * \sum_{j=1}^{n} items[j].dim[i]
+   */
+  std::vector<double> calculate_a(const std::vector<Item>& items) {
+    std::vector<double> a(items[0].dim(), 0);
+    for (auto& item : items) {
+      for (int i = 0; i < item.dim(); i++) {
+        a[i] += item.get_size(i);
+      }
+    }
+    for (auto& a_i : a) {
+      a_i /= items.size();
+    }
+    return a;
+  }
+
  protected:
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to
 };

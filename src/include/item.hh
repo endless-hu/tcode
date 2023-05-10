@@ -49,7 +49,7 @@ class Item {
    * @param i Dimension of the item
    * @return Size of the item in the dimension i
    */
-  double get_size(int i) const { return sizes_[i]; }
+  double get_size(int i) const { return sizes_.at(i); }
 
   std::string to_string() const {
     std::string s = "[";
