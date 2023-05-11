@@ -68,6 +68,15 @@ class AbstractAllocator {
     return a;
   }
 
+  std::string to_string() {
+    std::string s = "";
+    for (auto& bin : bins_) {
+      s += bin.to_string() + "\n";
+    }
+    s += "=== Total bins: " + std::to_string(bins_.size()) + "\n";
+    return s;
+  }
+
  protected:
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to
 };

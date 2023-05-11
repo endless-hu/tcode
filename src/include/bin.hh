@@ -9,7 +9,7 @@
 class Bin {
  private:
   std::vector<double> sizes_;  ///< Sizes of the bin in each dimension
-  std::vector<Item*> items_;   ///< Items in the bin
+  std::vector<Item> items_;    ///< Items in the bin
  public:
   Bin(int dim) : sizes_(dim, 1), items_() {}
 
@@ -39,7 +39,7 @@ class Bin {
     for (int i = 0; i < item.dim(); ++i) {
       sizes_[i] -= item.get_size(i);
     }
-    items_.push_back(&item);
+    items_.push_back(item);
   }
 
   double dot_product_with(const Item& item, const std::vector<double>& a) {
@@ -62,7 +62,7 @@ class Bin {
   std::string to_string() const {
     std::string s = "{\n";
     for (auto& item : items_) {
-      s += item->to_string() + "\n";
+      s += item.to_string() + "\n";
     }
     s += "}\n Remaining capacity: [";
     for (auto& size : sizes_) {

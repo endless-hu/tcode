@@ -4,7 +4,7 @@
 
 SpecialGenerator1::SpecialGenerator1(int numItems) {
   std::vector<double> item_type1{0.33333, 0.16666};
-  std::vector<double> item_type2{0.16666, 0.13333};
+  std::vector<double> item_type2{0.16666, 0.33333};
   for (int i = 0; i < numItems; i++) {
     if (i < numItems / 2) {
       items_.emplace_back(item_type1);
