@@ -19,7 +19,7 @@ class FFDItemCentricProductAllocator : public AbstractAllocator {
   /**
    * @brief Virtual function to allocate items to bins
    *
-   * @return Vector of bins with items allocated to them
+   * @return Number of bins with items allocated to them
    */
   int allocate(const std::vector<Item>& items) override;
 

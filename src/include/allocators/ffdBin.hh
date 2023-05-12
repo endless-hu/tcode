@@ -14,7 +14,7 @@ class FFDBinCentricAllocator : public AbstractAllocator {
   /**
    * @brief Virtual function to allocate items to bins
    *
-   * @return Vector of bins with items allocated to them
+   * @return number of bins with items allocated to them
    */
   int allocate(const std::vector<Item>& items) override;
 

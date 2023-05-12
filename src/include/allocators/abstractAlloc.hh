@@ -14,16 +14,13 @@
  */
 class AbstractAllocator {
  public:
-  /**
-   * @brief Constructor for Allocator class
-   */
   AbstractAllocator() = default;
 
-  /**
-   * @brief Function to evaluate the allocator
-   *
-   * @param items Vector of items to be allocated
-   */
+  // Run allocation algorithm and return the number of bins used
+  virtual int allocate(const std::vector<Item>& items) = 0;
+
+  // Run allocation algorithm and report relavent information in
+  // a human readable format
   void test_and_report(std::vector<Item>& items) {
     auto start = std::chrono::high_resolution_clock::now();
     int numBins = allocate(items);
@@ -36,25 +33,17 @@ class AbstractAllocator {
               << numBins << " bins.\n";
   }
 
-  /**
-   * @brief Virtual function to allocate items to bins
-   *
-   * @return Vector of bins with items allocated to them
-   */
-  virtual int allocate(const std::vector<Item>& items) = 0;
+  // Reset the allocator
+  void reset() { bins_.clear(); }
 
+  // Get the name of the allocator
   virtual std::string name() = 0;
-
-  virtual ~AbstractAllocator() = default;
 
   // Give out the bins
   std::vector<Bin> bins() { return bins_; }
 
-  /**
-   * @brief Calculate the a vector for the items
-   *
-   * a_i = 1/n * \sum_{j=1}^{n} items[j].dim[i]
-   */
+  // Calculate the `a` vector for the items
+  // a_i = 1/n * \sum_{j=1}^{n} items[j].dim[i]
   std::vector<double> calculate_a(const std::vector<Item>& items) {
     std::vector<double> a(items[0].dim(), 0);
     for (auto& item : items) {
@@ -68,6 +57,7 @@ class AbstractAllocator {
     return a;
   }
 
+  // Show the bins as a string
   std::string to_string() {
     std::string s = "";
     for (auto& bin : bins_) {
@@ -76,6 +66,8 @@ class AbstractAllocator {
     s += "=== Total bins: " + std::to_string(bins_.size()) + "\n";
     return s;
   }
+
+  virtual ~AbstractAllocator() = default;
 
  protected:
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to
