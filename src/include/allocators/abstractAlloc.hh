@@ -5,6 +5,7 @@
 #include <string>
 
 #include "bin.hh"
+#include "debugger.hh"
 #include "item.hh"
 
 /**
@@ -54,6 +55,7 @@ class AbstractAllocator {
     for (auto& a_i : a) {
       a_i /= items.size();
     }
+    LOG_INFO("a = %s\n", ::to_string(a).c_str());
     return a;
   }
 
