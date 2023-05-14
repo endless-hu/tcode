@@ -55,7 +55,9 @@ class AbstractAllocator {
     for (auto& a_i : a) {
       a_i /= items.size();
     }
+#ifdef LOGGER
     LOG_INFO("a = %s\n", vector_to_string(a).c_str());
+#endif
     return a;
   }
 

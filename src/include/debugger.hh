@@ -1,7 +1,5 @@
 #pragma once
 
-// #ifdef LOGGER
-
 #include <ctime>
 #include <string>
 #include <vector>
@@ -41,5 +39,3 @@ inline void OutputLogHeader(const char *file, int line, const char *func) {
   ::fprintf(LOG_OUTPUT_STREAM, __VA_ARGS__);               \
   fprintf(LOG_OUTPUT_STREAM, "\n");                        \
   ::fflush(stdout)
-
-// #endif

@@ -11,7 +11,9 @@ int FFDItemCentricProductAllocator::allocate(const std::vector<Item>& items) {
   std::sort(
       items_copy.begin(), items_copy.end(),
       [](const Item& a, const Item& b) { return a.product() > b.product(); });
+#ifdef LOGGER
   LOG_INFO("Sorted items: %s", vector_to_string(items_copy).c_str());
+#endif
   // now we can use the First Fit
   FirstFitAllocator ffa;
   int num = ffa.allocate(items_copy);
@@ -26,7 +28,9 @@ int FFDItemCentricSumAllocator::allocate(const std::vector<Item>& items) {
   // sort the items by their sum
   std::sort(items_copy.begin(), items_copy.end(),
             [&vec_a](Item& a, Item& b) { return a.sum(vec_a) > b.sum(vec_a); });
+#ifdef LOGGER
   LOG_INFO("Sorted items: %s", vector_to_string(items_copy).c_str());
+#endif
   // now we can use the First Fit
   FirstFitAllocator ffa;
   int num = ffa.allocate(items_copy);
