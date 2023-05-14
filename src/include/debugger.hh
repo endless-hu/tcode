@@ -42,22 +42,4 @@ inline void OutputLogHeader(const char *file, int line, const char *func) {
   fprintf(LOG_OUTPUT_STREAM, "\n");                        \
   ::fflush(stdout)
 
-template <typename T>
-std::string to_string(std::vector<T> &v) {
-  std::string s = "";
-  for (auto &i : v) {
-    s += i.to_string();
-  }
-  return s;
-}
-
-template <>
-std::string to_string(std::vector<double> &v) {
-  std::string s = "";
-  for (auto &i : v) {
-    s += std::to_string(i) + " ";
-  }
-  return s;
-}
-
 // #endif

@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "bin.hh"
+#include "debugger.hh"
 #include "item.hh"
 
 /**

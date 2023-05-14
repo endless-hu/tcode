@@ -9,7 +9,8 @@ RandomSplitGenerator::RandomSplitGenerator(int numBins, int dim) {
   // Choose a random real number between 0 and 1
   std::default_random_engine e1(r());
   std::uniform_real_distribution<double> uniform_dist(0, 1);
-  std::uniform_int_distribution<int> gen_num_items(1, 10);
+  // split a bin into 1~7 items
+  std::uniform_int_distribution<int> gen_num_items(1, 7);
 
   // a column is an item, the whole array represents a bin
   std::vector<std::vector<double>> item_raw_array;
@@ -22,11 +23,12 @@ RandomSplitGenerator::RandomSplitGenerator(int numBins, int dim) {
 
     std::vector<double> raw_item(dim);
     for (uint64_t i = 0; i < item_raw_array.at(0).size(); i++) {
-      for (uint d = 0; d < dim; d++) {
-        raw_item.at(d) = item_raw_array.at(i).at(d);
+      for (int d = 0; d < dim; d++) {
+        raw_item.at(d) = item_raw_array.at(d).at(i);
       }
       items_.emplace_back(raw_item);
     }
+    item_raw_array.clear();
   }
 }
 
@@ -42,10 +44,11 @@ std::vector<double> RandomSplitGenerator::generate_segments(int num) {
     break_points.at(i) = uniform_dist(e1);
   }
   break_points.at(num) = 1;
-  std::sort(segments.begin(), segments.end());
+  std::sort(break_points.begin(), break_points.end());
 
   for (int i = 0; i < num; i++) {
     segments.push_back(break_points.at(i + 1) - break_points.at(i));
   }
+  std::random_shuffle(segments.begin(), segments.end());
   return segments;
 }

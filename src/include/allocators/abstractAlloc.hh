@@ -55,7 +55,7 @@ class AbstractAllocator {
     for (auto& a_i : a) {
       a_i /= items.size();
     }
-    LOG_INFO("a = %s\n", ::to_string(a).c_str());
+    LOG_INFO("a = %s\n", vector_to_string(a).c_str());
     return a;
   }
 
@@ -72,5 +72,21 @@ class AbstractAllocator {
   virtual ~AbstractAllocator() = default;
 
  protected:
+  std::string vector_to_string(std::vector<Item>& v) {
+    std::string s = "";
+    for (auto& i : v) {
+      s += i.to_string();
+    }
+    return s;
+  }
+
+  std::string vector_to_string(std::vector<double>& v) {
+    std::string s = "";
+    for (auto& i : v) {
+      s += std::to_string(i) + " ";
+    }
+    return s;
+  }
+
   std::vector<Bin> bins_;  ///< Vector of bins to be allocated to
 };

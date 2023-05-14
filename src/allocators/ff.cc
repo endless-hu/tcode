@@ -1,7 +1,5 @@
 #include "ff.hh"
 
-#include "debugger.hh"
-
 int FirstFitAllocator::allocate(const std::vector<Item>& items) {
   for (auto item : items) {
     bool allocated = false;
