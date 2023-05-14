@@ -68,7 +68,7 @@ class Bin {
     for (auto& size : sizes_) {
       s += std::to_string(size) + " ";
     }
-    s += "]\n-------\n";
+    s += "]\n";
     return s;
   }
 };

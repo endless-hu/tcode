@@ -32,6 +32,10 @@ class AbstractAllocator {
                      .count()
               << " milliseconds to allocate " << items.size() << " items to "
               << numBins << " bins.\n";
+    if (numBins > (int)items.size()) {
+      std::cerr << "[ERROR] Use more bins than items!!! First 5 bins: "
+                << to_string() << std::endl;
+    }
   }
 
   // Reset the allocator
@@ -64,8 +68,15 @@ class AbstractAllocator {
   // Show the bins as a string
   std::string to_string() {
     std::string s = "";
+    int i = 0;
     for (auto& bin : bins_) {
-      s += bin.to_string() + "\n";
+      s += bin.to_string();
+      if (i++ > 3) break;
+    }
+    s += "    ...\nLast 3 bins:\n";
+    for (auto it = bins_.rbegin(); it != bins_.rend(); it++) {
+      s += it->to_string();
+      if (i++ > 6) break;
     }
     s += "=== Total bins: " + std::to_string(bins_.size()) + "\n";
     return s;

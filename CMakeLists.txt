@@ -18,9 +18,9 @@ else()
 endif()
 
 # Add all .cc files under src/
-file(GLOB_RECURSE SOURCES "src/*.cc")
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-
+file(GLOB SOURCES "src/allocators/*.cc" "src/generators/*.cc")
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} "src/benchmark.cc")
+add_executable(${CMAKE_PROJECT_NAME}_single ${SOURCES} "src/main.cc")
 include_directories("src/include")
 include_directories("src/include/allocators")
 include_directories("src/include/generators")
