@@ -12,9 +12,13 @@ class RandomSplitGenerator : public AbstractGenerator {
   /**
    * @brief Constructor for Random Split Generator class
    *
-   * @param numItems Number of items to generate
+   * @param numBins Number of optimal bins
    */
-  RandomSplitGenerator(int numItems, int dim);
+  RandomSplitGenerator(int numBins, int dim);
 
   std::string name() override { return "Random Split Generator"; }
+
+ private:
+  // Randomly split 1 into `num` segments
+  std::vector<double> generate_segments(int num);
 };

@@ -10,19 +10,12 @@ class SimpleGenerator1 : public AbstractGenerator {
  public:
   SimpleGenerator1();
 
-  std::string name() override { return "Simple Generator 1"; }
+  std::string name() override { return "Simple Generator 2-dim"; }
 };
 
 class SimpleGenerator2 : public AbstractGenerator {
  public:
   SimpleGenerator2();
 
-  std::string name() override { return "Simple Generator 2"; }
-};
-
-class SimpleGenerator3 : public AbstractGenerator {
- public:
-  SimpleGenerator3();
-
-  std::string name() override { return "Simple Generator 3"; }
+  std::string name() override { return "Simple Generator 3-dim"; }
 };
