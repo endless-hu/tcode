@@ -8,7 +8,7 @@
 #define NUMITEMS 100
 #define NUMITEMSBIG 1000
 #define NUMBINS 40
-#define NUMBINSBIG 100
+#define NUMBINSBIG 1000
 
 int main() {
   // Prepare allocators
@@ -28,13 +28,19 @@ int main() {
 
   generators.push_back(new RandomSplitGenerator(NUMBINS, DIM2));
   generators.push_back(new RandomSplitGenerator(NUMBINS, DIM_HIGH));
-  generators.push_back(new RandomSplitGenerator(NUMITEMSBIG, DIM2));
-  generators.push_back(new RandomSplitGenerator(NUMITEMSBIG, DIM_HIGH));
+  generators.push_back(new RandomSplitGenerator(NUMBINSBIG, DIM2));
+  generators.push_back(new RandomSplitGenerator(NUMBINSBIG, DIM_HIGH));
 
   // Run allocators
-  for (auto& allocator : allocators) {
-    for (auto& generator : generators) {
+  for (auto allocator : allocators) {
+    for (auto generator : generators) {
       allocator->test_and_report(generator->get_items());
+      if (RandomSplitGenerator* split_gen =
+              dynamic_cast<RandomSplitGenerator*>(generator);
+          split_gen != nullptr) {
+        std::cout << "..." << std::endl;
+      }
+      allocator->reset();
     }
   }
 

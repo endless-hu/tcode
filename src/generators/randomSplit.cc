@@ -30,6 +30,7 @@ RandomSplitGenerator::RandomSplitGenerator(int numBins, int dim) {
     }
     item_raw_array.clear();
   }
+  std::random_shuffle(items_.begin(), items_.end());
 }
 
 std::vector<double> RandomSplitGenerator::generate_segments(int num) {
