@@ -57,7 +57,7 @@ class AbstractAllocator {
   virtual std::string name() = 0;
 
   // Give out the bins
-  std::vector<Bin> bins() { return bins_; }
+  std::vector<Bin>& bins() { return bins_; }
 
   // Calculate the `a` vector for the items
   // a_i = 1/n * \sum_{j=1}^{n} items[j].dim[i]
