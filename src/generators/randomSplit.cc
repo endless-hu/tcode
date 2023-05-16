@@ -4,6 +4,7 @@
 #include <random>
 
 RandomSplitGenerator::RandomSplitGenerator(int numBins, int dim) {
+  num_bins_ = numBins;
   // Seed with a real random value, if available
   std::random_device r;
   // Choose a random real number between 0 and 1

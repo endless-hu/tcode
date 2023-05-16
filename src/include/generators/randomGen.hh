@@ -13,9 +13,11 @@ class RandomGenerator : public AbstractGenerator {
    * @brief Constructor for Random Generator class
    *
    * @param numItems Number of items to generate
-   * @param binCapacity Capacity of bins to be generated
+   * @param dim Dimension of the items to generate
    */
   RandomGenerator(int numItems, int dim);
 
-  std::string name() override { return "Random Generator"; }
+  std::string name() override {
+    return "RandomGenerator-" + std::to_string(items_.at(0).dim());
+  }
 };

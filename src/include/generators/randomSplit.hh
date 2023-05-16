@@ -16,9 +16,15 @@ class RandomSplitGenerator : public AbstractGenerator {
    */
   RandomSplitGenerator(int numBins, int dim);
 
-  std::string name() override { return "Random Split Generator"; }
+  // Get the number of bins
+  int get_num_bins() { return num_bins_; }
+
+  std::string name() override {
+    return "RandomSplitGenerator-" + std::to_string(items_.begin()->dim());
+  }
 
  private:
+  int num_bins_;  // Number of optimal bins
   // Randomly split 1 into `num` segments
   std::vector<double> generate_segments(int num);
 };

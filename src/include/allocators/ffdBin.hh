@@ -32,7 +32,7 @@ class FFDBinCentricDotProductAllocator : public FFDBinCentricAllocator {
  public:
   FFDBinCentricDotProductAllocator() = default;
 
-  std::string name() override { return "FFD-Bin Centric Dot Product"; }
+  std::string name() override { return "FFD Bin-Centric Dot Product"; }
 
   bool pack_largest_item(std::vector<Item>& items, Bin& bin,
                          const std::vector<double>& vec_a) override;
@@ -45,7 +45,7 @@ class FFDBinCentricNormAllocator : public FFDBinCentricAllocator {
  public:
   FFDBinCentricNormAllocator() = default;
 
-  std::string name() override { return "FFD-Bin Centric Norm"; }
+  std::string name() override { return "FFD Bin-Centric Norm"; }
 
   bool pack_largest_item(std::vector<Item>& items, Bin& bin,
                          const std::vector<double>& vec_a) override;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -22,19 +23,30 @@ class AbstractAllocator {
 
   // Run allocation algorithm and report relavent information in
   // a human readable format
-  void test_and_report(std::vector<Item>& items) {
+  void test_and_report(std::vector<Item>& items, std::string ofile_name = "") {
     auto start = std::chrono::high_resolution_clock::now();
     int numBins = allocate(items);
     auto end = std::chrono::high_resolution_clock::now();
-    std::cout << name() << " took "
+    if (ofile_name == "") {
+      std::cout << name() << " took "
+                << std::chrono::duration_cast<std::chrono::milliseconds>(end -
+                                                                         start)
+                       .count()
+                << " milliseconds to allocate " << items.size() << " items to "
+                << numBins << " bins.\n";
+      if (numBins > (int)items.size()) {
+        std::cerr << "[ERROR] Use more bins than items!!! First 5 bins: "
+                  << to_string() << std::endl;
+      }
+    } else {
+      // Flush machine readable output to `ofile_name`
+      std::ofstream outfile(ofile_name, std::ios_base::app);
+      outfile << name() << "#" << numBins << "#"
               << std::chrono::duration_cast<std::chrono::milliseconds>(end -
                                                                        start)
                      .count()
-              << " milliseconds to allocate " << items.size() << " items to "
-              << numBins << " bins.\n";
-    if (numBins > (int)items.size()) {
-      std::cerr << "[ERROR] Use more bins than items!!! First 5 bins: "
-                << to_string() << std::endl;
+              << std::endl;
+      outfile.close();
     }
   }
 

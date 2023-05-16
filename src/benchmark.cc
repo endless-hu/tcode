@@ -5,12 +5,17 @@
 #define DIM3 3
 #define DIM_HIGH 20
 
-#define NUMITEMS 100
-#define NUMITEMSBIG 1000
-#define NUMBINS 40
-#define NUMBINSBIG 1000
+#define NUMITEMS 1000
+#define NUMITEMDELTA 2000
+#define NUMBINS 1000
+#define NUMBINSDELTA 500
+#define NUMPOINTS 5
 
 int main() {
+  // Remove old files a.k.a "*.txt"
+  if (system("rm *.txt")) {
+    std::cerr << "Error removing old files\n";
+  }
   // Prepare allocators
   std::vector<AbstractAllocator*> allocators;
   allocators.push_back(new FirstFitAllocator);
@@ -20,35 +25,63 @@ int main() {
   allocators.push_back(new FFDBinCentricNormAllocator);
 
   // Prepare generators
-  std::vector<AbstractGenerator*> generators;
-  generators.push_back(new RandomGenerator(NUMITEMS, DIM2));
-  generators.push_back(new RandomGenerator(NUMITEMS, DIM3));
-  generators.push_back(new RandomGenerator(NUMITEMSBIG, DIM2));
-  generators.push_back(new RandomGenerator(NUMITEMSBIG, DIM_HIGH));
+  std::vector<AbstractGenerator*> generators_dim2;
+  std::vector<AbstractGenerator*> generators_dim3;
+  std::vector<AbstractGenerator*> generators_dim_high;
 
-  generators.push_back(new RandomSplitGenerator(NUMBINS, DIM2));
-  generators.push_back(new RandomSplitGenerator(NUMBINS, DIM_HIGH));
-  generators.push_back(new RandomSplitGenerator(NUMBINSBIG, DIM2));
-  generators.push_back(new RandomSplitGenerator(NUMBINSBIG, DIM_HIGH));
+  std::vector<AbstractGenerator*> ran_gen_dim2;
+  std::vector<AbstractGenerator*> ran_gen_dim3;
+  std::vector<AbstractGenerator*> ran_gen_dim_high;
 
+  for (int i = 0; i < NUMPOINTS; i++) {
+    generators_dim2.push_back(
+        new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM2));
+    generators_dim3.push_back(
+        new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM3));
+    generators_dim_high.push_back(
+        new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM_HIGH));
+
+    ran_gen_dim2.push_back(
+        new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM2));
+    ran_gen_dim3.push_back(
+        new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM3));
+    ran_gen_dim_high.push_back(
+        new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM_HIGH));
+  }
+
+  std::vector<std::vector<AbstractGenerator*>> generators{
+      generators_dim2, generators_dim3, generators_dim_high,
+      ran_gen_dim2,    ran_gen_dim3,    ran_gen_dim_high};
+  std::cout << "Generators prepared\n";
   // Run allocators
-  for (auto allocator : allocators) {
-    for (auto generator : generators) {
-      allocator->test_and_report(generator->get_items());
-      if (RandomSplitGenerator* split_gen =
-              dynamic_cast<RandomSplitGenerator*>(generator);
-          split_gen != nullptr) {
-        std::cout << "..." << std::endl;
+  for (auto generator : generators) {
+    for (auto gen : generator) {
+      std::string file_name = gen->name() + ".txt";
+      // Prepare header for each test case
+      // Format: <num_items> [<num_bins> | if RandomSplitGenerator]
+      std::fstream file(file_name, std::ios::app);
+      file << gen->get_items().size();
+      if (RandomSplitGenerator* rsg =
+              dynamic_cast<RandomSplitGenerator*>(gen)) {
+        file << " " << rsg->get_num_bins();
       }
-      allocator->reset();
+      file << std::endl;
+      file.close();
+
+      for (auto allocator : allocators) {
+        allocator->test_and_report(gen->get_items(), file_name);
+        allocator->reset();
+      }
     }
   }
 
   // Clean up
-  for (auto& allocator : allocators) {
+  for (auto allocator : allocators) {
     delete allocator;
   }
-  for (auto& generator : generators) {
-    delete generator;
+  for (auto generator : generators) {
+    for (auto gen : generator) {
+      delete gen;
+    }
   }
 }
