@@ -10,11 +10,11 @@ int main() {
   RandomSplitGenerator ran_split_gen_2(NUMBINS, DIM);
 
   std::cout << "... Testing Write RandomGenerator ...\n";
-  ReaderWriter::write("RandomGenerator.txt", &ran_gen_2);
+  ReaderWriter::write(&ran_gen_2);
   std::cout << "Read back RandomGenerator.txt\n";
   int dim = 0, num_bins = 0;
   auto items_read_back =
-      ReaderWriter::read("RandomGenerator.txt", &dim, &num_bins);
+      ReaderWriter::read(ran_gen_2.name() + ".txt", &dim, &num_bins);
   if (dim != DIM) {
     std::cerr << "Error: Dimension read back = " << dim << " is not correct";
     std::abort();
@@ -37,11 +37,11 @@ int main() {
   std::cout << "=== Passed RandomGenerator ReadWrite Test ===\n";
 
   std::cout << "... Testing Write RandomSplitGenerator ...\n";
-  ReaderWriter::write("RandomSplitGenerator.txt", &ran_split_gen_2);
+  ReaderWriter::write(&ran_split_gen_2);
   std::cout << "Read back RandomSplitGenerator.txt\n";
   dim = 0, num_bins = 0;
   auto items_read_back_2 =
-      ReaderWriter::read("RandomSplitGenerator.txt", &dim, &num_bins);
+      ReaderWriter::read(ran_split_gen_2.name() + ".txt", &dim, &num_bins);
   if (dim != DIM) {
     std::cerr << "Error: Dimension read back = " << dim << " is not correct";
     std::abort();
