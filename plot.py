@@ -79,6 +79,7 @@ def plot(filename):
     # Plot the grouped bar chart
     x = np.arange(len(num_items))  # the label locations
     width = 0.15  # the width of the bars
+
     multiplier = 0
     fig, ax = plt.subplots(layout='constrained')
     fig.set_size_inches(10, 5)
@@ -98,6 +99,7 @@ def plot(filename):
 
     plt.savefig(f'build/{filename}-bin.png')
 
+    multiplier = 0
     fig, ax = plt.subplots(layout='constrained')
     fig.set_size_inches(10, 5)
     for name, ms in name2ms.items():
