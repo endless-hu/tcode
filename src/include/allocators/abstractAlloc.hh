@@ -28,12 +28,11 @@ class AbstractAllocator {
     int numBins = allocate(items);
     auto end = std::chrono::high_resolution_clock::now();
     if (ofile_name == "") {
-      std::cout << name() << " took "
+      std::cout << name() << "#" << numBins << "#"
                 << std::chrono::duration_cast<std::chrono::milliseconds>(end -
                                                                          start)
                        .count()
-                << " milliseconds to allocate " << items.size() << " items to "
-                << numBins << " bins.\n";
+                << std::endl;
       if (numBins > (int)items.size()) {
         std::cerr << "[ERROR] Use more bins than items!!! First 5 bins: "
                   << to_string() << std::endl;
