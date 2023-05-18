@@ -23,7 +23,8 @@ class Item {
    * @param dim Dimension of the item
    * @param sizes Vector of sizes of the item in each dimension
    */
-  Item(std::vector<double> sizes) : sizes_(sizes), product_(1), sum_(0) {
+  explicit Item(std::vector<double> sizes)
+      : sizes_(sizes), product_(1), sum_(0) {
     for (auto& size : sizes_) {
       product_ *= size;
     }
@@ -77,5 +78,19 @@ class Item {
       }
     }
     return sum_;
+  }
+
+  bool operator==(const Item& other) const {
+    if (dim() != other.dim()) {
+      return false;
+    }
+    // Since we use double, we should allow some error
+    double EPS = 1e-4;
+    for (int i = 0; i < dim(); i++) {
+      if (std::abs(sizes_[i] - other.sizes_[i]) > EPS) {
+        return false;
+      }
+    }
+    return true;
   }
 };

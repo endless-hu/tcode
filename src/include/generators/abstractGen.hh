@@ -23,6 +23,10 @@ class AbstractGenerator {
 
   std::vector<Item>& get_items() { return items_; }
 
+  int get_dimension() { return items_.at(0).dim(); }
+
+  int get_num_items() { return items_.size(); }
+
   // To output for machine processing
   std::string format_to_string() {
     std::string s = "" + std::to_string(items_[0].dim()) + " " +
