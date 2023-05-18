@@ -21,6 +21,7 @@ endif()
 file(GLOB SOURCES "src/allocators/*.cc" "src/generators/*.cc")
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES} "src/benchmark.cc")
 add_executable(${CMAKE_PROJECT_NAME}_single ${SOURCES} "src/main.cc")
+add_executable(${CMAKE_PROJECT_NAME}_case_generator ${SOURCES} "src/gen.cc")
 include_directories("src/include")
 include_directories("src/include/allocators")
 include_directories("src/include/generators")
@@ -45,3 +46,12 @@ foreach(TEST_SOURCE ${TEST_SOURCES})
   )
   add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
 endforeach()
+
+# ------------------------------
+#   Custom targets
+#  `make purge` to remove all generated `*.txt`, `*.png` files
+# ------------------------------
+add_custom_target(
+  purge
+  COMMAND rm -rf *.txt *.png
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
