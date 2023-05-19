@@ -26,10 +26,10 @@ RandomGeneratorNegRel::RandomGeneratorNegRel(int numItems, int dim) {
   // Seed with a real random value, if available
   std::random_device r;
   std::default_random_engine e1(r());
-  std::normal_distribution<double> normal_dists(0, 1);
+  std::uniform_real_distribution<double> normal_dists(0, 1);
 
-  double max_coeff = -1;
-  double min_coeff = 1;
+  double max_coeff = 0;
+  double min_coeff = 100;
   std::vector<Eigen::VectorXd> items_in_eigen_vector;
   for (int i = 0; i < numItems; i++) {
     // Generate `dim` uncorrelated numbers
@@ -66,6 +66,9 @@ RandomGeneratorNegRel::RandomGeneratorNegRel(int numItems, int dim) {
     for (int i = 0; i < dim; i++) {
       item_raw.push_back(item(i));
     }
+    // Random shuffle is necessary, because the above normalization
+    // process will always make the first dimension the largest.
+    std::random_shuffle(item_raw.begin(), item_raw.end());
     items_.emplace_back(item_raw);
   }
 }
