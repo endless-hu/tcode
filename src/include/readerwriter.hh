@@ -67,7 +67,7 @@ class ReaderWriter {
   }
 
   static void write(AbstractGenerator* generator) {
-    std::string file_name = generator->name() + ".txt";
+    std::string file_name = generator->name() + "-case.txt";
     std::ofstream file(file_name, std::ios::app);
     if (file.is_open()) {
       // The first line could be:

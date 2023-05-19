@@ -1,5 +1,6 @@
 #include "allocators.hh"
 #include "generators.hh"
+#include "readerwriter.hh"
 
 #define DIM2 2
 #define DIM3 3
@@ -36,17 +37,23 @@ int main() {
   for (int i = 0; i < NUMPOINTS; i++) {
     generators_dim2.push_back(
         new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM2));
+    ReaderWriter::write(generators_dim2.back());
     generators_dim3.push_back(
         new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM3));
+    ReaderWriter::write(generators_dim3.back());
     generators_dim_high.push_back(
         new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM_HIGH));
+    ReaderWriter::write(generators_dim_high.back());
 
     ran_gen_dim2.push_back(
         new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM2));
+    ReaderWriter::write(ran_gen_dim2.back());
     ran_gen_dim3.push_back(
         new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM3));
+    ReaderWriter::write(ran_gen_dim3.back());
     ran_gen_dim_high.push_back(
         new RandomGenerator(NUMITEMS + i * NUMITEMDELTA, DIM_HIGH));
+    ReaderWriter::write(ran_gen_dim_high.back());
   }
 
   std::vector<std::vector<AbstractGenerator*>> generators{

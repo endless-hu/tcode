@@ -120,9 +120,11 @@ def plot(filename):
 
 
 if __name__ == "__main__":
-    # Get all file named "*.txt" under `build/`(non-recursive, name-only)
+    # Get all file named "*[0-9].txt" under `build/`(non-recursive, name-only)
     files = os.popen(
         "find build/ -maxdepth 1 -name '*.txt' -printf '%f\n'").read().splitlines()
+    # Remove all file names containing "case"
+    files = [file for file in files if "case" not in file]
 
     for file in files:
         print(f"Plotting {file}")

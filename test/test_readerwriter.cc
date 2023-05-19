@@ -14,7 +14,7 @@ int main() {
   std::cout << "Read back RandomGenerator.txt\n";
   int dim = 0, num_bins = 0;
   auto items_read_back =
-      ReaderWriter::read(ran_gen_2.name() + ".txt", &dim, &num_bins);
+      ReaderWriter::read(ran_gen_2.name() + "-case.txt", &dim, &num_bins);
   if (dim != DIM) {
     std::cerr << "Error: Dimension read back = " << dim << " is not correct";
     std::abort();
@@ -41,7 +41,7 @@ int main() {
   std::cout << "Read back RandomSplitGenerator.txt\n";
   dim = 0, num_bins = 0;
   auto items_read_back_2 =
-      ReaderWriter::read(ran_split_gen_2.name() + ".txt", &dim, &num_bins);
+      ReaderWriter::read(ran_split_gen_2.name() + "-case.txt", &dim, &num_bins);
   if (dim != DIM) {
     std::cerr << "Error: Dimension read back = " << dim << " is not correct";
     std::abort();
