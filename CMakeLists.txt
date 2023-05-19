@@ -25,6 +25,7 @@ add_executable(${CMAKE_PROJECT_NAME}_case_generator ${SOURCES} "src/gen.cc")
 include_directories("src/include")
 include_directories("src/include/allocators")
 include_directories("src/include/generators")
+include_directories("eigen-3.4.0")
 
 # enable ctest
 enable_testing()
