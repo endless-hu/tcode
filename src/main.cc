@@ -3,28 +3,14 @@
 
 #include "allocators.hh"
 #include "generators.hh"
+#include "readerwriter.hh"
 
-std::vector<Item> input_data(int d, int n) {
-  std::vector<double> szs;
-  szs.reserve(d);
-  double sz;
-  std::vector<Item> items;
-  for (int i = 0; i < n; i++) {
-    for (int j = 0; j < d; j++) {
-      std::cin >> sz;
-      szs.push_back(sz);
-    }
-    items.emplace_back(szs);
-    szs.clear();
+int main(int argc, char** argv) {
+  if (argc != 2) {
+    std::cerr << "Usage: " << argv[0] << " <input_file>\n";
+    return 1;
   }
-  return items;
-}
-
-int main() {
-  int n, d;
-  std::cout << "Enter `#dimension #items`: ";
-  std::cin >> d >> n;
-  std::vector<Item> items = input_data(d, n);
+  std::vector<Item> items = ReaderWriter::read(std::string(argv[1]));
 
   // Prepare allocators
   std::vector<AbstractAllocator*> allocators;

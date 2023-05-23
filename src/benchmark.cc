@@ -38,6 +38,8 @@ int main() {
   std::vector<AbstractGenerator*> ran_gen_neg_rel_dim3;
   std::vector<AbstractGenerator*> ran_gen_neg_rel_dim_high;
 
+  std::vector<AbstractGenerator*> special_gen_dim2;
+
   for (int i = 0; i < NUMPOINTS; i++) {
     generators_dim2.push_back(
         new RandomSplitGenerator(NUMBINS + i * NUMBINSDELTA, DIM2));
@@ -68,12 +70,17 @@ int main() {
     ran_gen_neg_rel_dim_high.push_back(
         new RandomGeneratorNegRel(NUMITEMS + i * NUMITEMDELTA, DIM_HIGH));
     ReaderWriter::write(ran_gen_neg_rel_dim_high.back());
+
+    special_gen_dim2.push_back(
+        new SpecialGenerator1(NUMITEMS + i * NUMITEMDELTA));
+    ReaderWriter::write(special_gen_dim2.back());
   }
 
   std::vector<std::vector<AbstractGenerator*>> generators{
       generators_dim2,      generators_dim3,      generators_dim_high,
       ran_gen_dim2,         ran_gen_dim3,         ran_gen_dim_high,
-      ran_gen_neg_rel_dim2, ran_gen_neg_rel_dim3, ran_gen_neg_rel_dim_high};
+      ran_gen_neg_rel_dim2, ran_gen_neg_rel_dim3, ran_gen_neg_rel_dim_high,
+      special_gen_dim2};
   std::cout << "Generators prepared\n";
   // Run allocators
   for (auto generator : generators) {

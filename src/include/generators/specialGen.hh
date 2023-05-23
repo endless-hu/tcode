@@ -22,7 +22,7 @@ class SpecialGenerator1 : public AbstractGenerator {
    */
   SpecialGenerator1(int numItems);
 
-  std::string name() override { return "Special Generator 1"; }
+  std::string name() override { return "SpecialGen-2"; }
 };
 
 /**
@@ -37,5 +37,5 @@ class SpecialGenerator2 : public AbstractGenerator {
    */
   SpecialGenerator2(int numItems);
 
-  std::string name() override { return "Special Generator 1"; }
+  std::string name() override { return "SpecialGen-2"; }
 };
