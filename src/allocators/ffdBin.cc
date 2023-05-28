@@ -50,33 +50,34 @@ bool FFDBinCentricDotProductAllocator::pack_largest_item(
   return true;
 }
 
+// Acutually in Norm2 it is smallest item
 bool FFDBinCentricNormAllocator::pack_largest_item(
     std::vector<Item>& items, Bin& bin, const std::vector<double>& vec_a) {
   // == find the largest item that can fit in the bin
   // First we find the first item that fits the bin
-  auto largest_item_it = items.begin();
-  for (; largest_item_it != items.end(); largest_item_it++) {
-    if (bin.fits(*largest_item_it)) break;
+  auto smallest_item_it = items.begin();
+  for (; smallest_item_it != items.end(); smallest_item_it++) {
+    if (bin.fits(*smallest_item_it)) break;
   }
-  if (largest_item_it == items.end()) {  // No items can fit the bin
+  if (smallest_item_it == items.end()) {  // No items can fit the bin
 #ifdef LOGGER
     LOG_INFO("No item can fit the bin");
 #endif
     return false;
   }
   // Find the largest item
-  for (auto it = largest_item_it; it != items.end(); it++) {
+  for (auto it = smallest_item_it; it != items.end(); it++) {
     if (bin.fits(*it) &&
-        bin.norm2(*it, vec_a) > bin.norm2(*largest_item_it, vec_a)) {
-      largest_item_it = it;
+        bin.norm2(*it, vec_a) < bin.norm2(*smallest_item_it, vec_a)) {
+      smallest_item_it = it;
     }
   }
   // pack the item
-  bin.add_item(*largest_item_it);
+  bin.add_item(*smallest_item_it);
 #ifdef LOGGER
   LOG_INFO("Bin info: %s", bin.to_string().c_str());
 #endif
   // remove the item from the list
-  items.erase(largest_item_it);
+  items.erase(smallest_item_it);
   return true;
 }

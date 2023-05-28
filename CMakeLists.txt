@@ -56,3 +56,19 @@ add_custom_target(
   purge
   COMMAND rm -rf *.txt *.png
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+
+# ------------------------------
+#   Custom targets
+#  `make run` to run the following two commands:
+#      $ ./BinPackingFFD
+#      $ pushd ../
+#      $ python3 plot.py
+#      $ popd
+# ------------------------------
+add_custom_target(
+  run
+  COMMAND ${CMAKE_PROJECT_NAME}
+  COMMAND pushd ../
+  COMMAND python3 plot.py
+  COMMAND popd
+  WORKING_DIRECTORY ${CMAKE_BINARY_DIR})

@@ -4,9 +4,13 @@
 
 ## 编译步骤
 
-### 1. 安装依赖库Eigen-3.4.0
+以下步骤在Ubuntu 22.04.2 LTS下测试通过。
+
+### 1. 安装必要的软件和依赖库Eigen-3.4.0
 
 ```bash
+$ sudo apt update
+$ sudo apt install cmake build-essential
 $ https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 $ tar -xvf eigen-3.4.0.tar.gz
 ```
@@ -32,6 +36,12 @@ $ make -j 8
 手动测试，即打印出结果然后人工检查是否合理。
 
 ## 运行流程
+
+**以下流程可以通过在`build/`下使用一个命令自动化运行**：
+  
+```bash
+$ make run
+```
 
 ### 1. 生成测试用例
 
