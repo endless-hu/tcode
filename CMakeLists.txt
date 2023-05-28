@@ -61,14 +61,10 @@ add_custom_target(
 #   Custom targets
 #  `make run` to run the following two commands:
 #      $ ./BinPackingFFD
-#      $ pushd ../
 #      $ python3 plot.py
-#      $ popd
 # ------------------------------
 add_custom_target(
   run
   COMMAND ${CMAKE_PROJECT_NAME}
-  COMMAND pushd ../
-  COMMAND python3 plot.py
-  COMMAND popd
+  COMMAND python3 ../plot.py
   WORKING_DIRECTORY ${CMAKE_BINARY_DIR})

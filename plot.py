@@ -120,6 +120,8 @@ def plot(filename):
 
 
 if __name__ == "__main__":
+    # cd to the directory of this script
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     # Get all file named "*[0-9].txt" under `build/`(non-recursive, name-only)
     files = os.popen(
         "find build/ -maxdepth 1 -name '*.txt' -printf '%f\n'").read().splitlines()
