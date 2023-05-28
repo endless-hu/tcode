@@ -11,7 +11,7 @@
 ```bash
 $ sudo apt update
 $ sudo apt install cmake build-essential
-$ https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+$ wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 $ tar -xvf eigen-3.4.0.tar.gz
 ```
 

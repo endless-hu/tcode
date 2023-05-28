@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the repository
+    - uses: actions/checkout@v2
+    # Install dependencies
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y cmake build-essential wget
+        wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+        tar -xzf eigen-3.4.0.tar.gz
+    
+    - name: Compile and Run
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j 2
+        make run
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with: # all files named `*.txt` and `*.png` under `build` directory
+        name: artifacts
+        path: |
+          build/*.txt
+          build/*.png
