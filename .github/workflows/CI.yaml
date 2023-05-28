@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'src/**'
+      - '.github/workflows/CI.yaml'
   workflow_dispatch:
 
 jobs:
@@ -20,6 +21,7 @@ jobs:
         sudo apt install -y cmake build-essential wget
         wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
         tar -xzf eigen-3.4.0.tar.gz
+        pip3 install matplotlib numpy
     
     - name: Compile and Run
       run: |

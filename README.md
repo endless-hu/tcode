@@ -1,6 +1,9 @@
 # 多维向量装箱问题模拟系统
+[![CI](https://github.com/endless-hu/tcode/actions/workflows/CI.yaml/badge.svg)](https://github.com/endless-hu/tcode/actions/workflows/CI.yaml)
 
 本仓库为毕业设计的代码仓库，主要用于模拟多维向量装箱问题的模拟系统。
+
+运行结果可以直接去GitHub Action的Artifacts中下载，也可以通过以下步骤自行编译。
 
 ## 编译步骤
 
@@ -13,6 +16,7 @@ $ sudo apt update
 $ sudo apt install cmake build-essential
 $ wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
 $ tar -xvf eigen-3.4.0.tar.gz
+$ pip3 install matplotlib numpy
 ```
 
 ### 2. 编译
